@@ -1,5 +1,6 @@
 {
   "name": "codacy-seed",
+  "version": "0.0.1",
   "description": "Library to create Codacy Tools in Typescript",
   "keywords": [
     "codacy",
