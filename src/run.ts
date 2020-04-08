@@ -3,11 +3,6 @@ import { parseCodacyrcFile, readJsonFile } from "./fileUtils"
 import { parseTimeoutSeconds } from "./parseTimeoutSeconds"
 import { resultString } from "./resultString"
 
-const timeoutHandle = setTimeout(() => {
-  console.error("Timeout occurred. Exiting.")
-  process.exit(2)
-}, parseTimeoutSeconds(process.env.TIMEOUT_SECONDS) * 1000)
-
 async function runImpl(engine: Engine) {
   const jsonFile = await readJsonFile("/.codacyrc")
 
@@ -21,10 +16,15 @@ async function runImpl(engine: Engine) {
 }
 
 export function run(engine: Engine): void {
+  const timeoutHandle = setTimeout(() => {
+    console.error("Timeout occurred. Exiting.")
+    process.exit(2)
+  }, parseTimeoutSeconds(process.env.TIMEOUT_SECONDS) * 1000)
+
   runImpl(engine)
-  .catch(e => {
-    console.error(e)
-    process.exit(1)
-  })
-  .finally(() => clearTimeout(timeoutHandle))
+    .catch((e) => {
+      console.error(e)
+      process.exit(1)
+    })
+    .finally(() => clearTimeout(timeoutHandle))
 }
