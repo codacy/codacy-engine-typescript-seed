@@ -1,0 +1,11 @@
+{
+    "scripts": {
+        "compile": "tsc"
+    },
+    "dependencies": {
+        "codacy-seed": "file:.."
+    },
+    "devDependencies": {
+        "typescript": "^3.8.3"
+    }
+}

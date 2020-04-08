@@ -1,0 +1,81 @@
+{
+  "name": "codacy-seed",
+  "description": "Library to create Codacy Tools in Typescript",
+  "keywords": [
+    "codacy",
+    "linter",
+    "typescript"
+  ],
+  "homepage": "https://github.com/codacy/codacy-engine-typescript-seed#readme",
+  "bugs": {
+    "url": "https://github.com/codacy/codacy-engine-typescript-seed/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codacy/codacy-engine-typescript-seed.git"
+  },
+  "license": "Apache-2.0",
+  "directories": {
+    "test": "./src/test",
+    "src": "./src"
+  },
+  "scripts": {
+    "compile": "tsc",
+    "test": "mocha"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "package.json": [
+      "sort-package-json",
+      "git add"
+    ],
+    "src/*.{ts,js,css,json,md}": [
+      "prettier --write",
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "prettier": {
+    "semi": false
+  },
+  "main": "dist/src/index.js",
+  "typings": "dist/src/index.d.js",
+  "mocha": {
+    "extension": [
+      "ts"
+    ],
+    "require": "ts-node/register",
+    "spec": "src/test/**/*.spec.ts"
+  },
+  "dependencies": {
+    "@nodelib/fs.walk": "^1.2.4",
+    "node-fetch": "^2.6.0"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.2.11",
+    "@types/mocha": "^7.0.2",
+    "@types/node": "^13.9.4",
+    "@types/node-fetch": "^2.5.5",
+    "@types/simple-mock": "^0.8.1",
+    "@typescript-eslint/eslint-plugin": "^2.25.0",
+    "@typescript-eslint/parser": "^2.25.0",
+    "chai": "^4.2.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-simple-import-sort": "^5.0.2",
+    "eslint-plugin-unused-imports": "^0.1.2",
+    "husky": "^4.2.3",
+    "lint-staged": "^10.0.9",
+    "mocha": "^7.1.1",
+    "prettier": "^2.0.2",
+    "simple-mock": "^0.8.0",
+    "sort-package-json": "^1.40.0",
+    "ts-loader": "^6.2.2",
+    "ts-node": "^8.8.1",
+    "typescript": "^3.8.3"
+  }
+}
