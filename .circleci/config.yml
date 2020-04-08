@@ -27,6 +27,9 @@ workflows:
       - codacy/shell:
           name: publish_npm
           cmd: |
+            npm install
+            npm run compile
+
             # Setup npm credentials
             npm config set @codacy:registry https://registry.npmjs.org/
             npm config set _authToken $NPM_TOKEN
