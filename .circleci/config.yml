@@ -1,0 +1,52 @@
+version: 2.1
+
+orbs:
+  codacy: codacy/base@2.14.1
+  codacy_plugins_test: codacy/plugins-test@0.10.6
+
+workflows:
+  version: 2
+  compile_test_deploy:
+    jobs:
+      - codacy/checkout_and_version
+      - codacy/shell:
+          name: publish_docker_local
+          cmd: |
+            docker build -t $CIRCLE_PROJECT_REPONAME:latest .
+            docker save --output docker-image.tar $CIRCLE_PROJECT_REPONAME:latest
+          persist_to_workspace: true
+          requires:
+            - codacy/checkout_and_version
+      - codacy_plugins_test/run:
+          name: plugins_test
+          run_multiple_tests: true
+          run_json_tests: false
+          run_pattern_tests: false
+          requires:
+            - publish_docker_local
+      - codacy/shell:
+          name: publish_npm
+          cmd: |
+            # Setup npm credentials
+            npm config set @codacy:registry https://registry.npmjs.org/
+            npm config set _authToken $NPM_TOKEN
+            npm config set access public
+            npm config set save-exact true
+
+            # Update version in packages to publish
+            npm version --no-git-tag-version --no-commit-hooks "$(cat .version)"
+
+            # Publish package versions to npmjs.org
+            npm publish        
+          context: CodacyNPM
+          requires:
+            - plugins_test
+          # filters:
+          #   branches:
+          #     only:
+          #       - master
+      - codacy/tag_version:
+          name: tag_version
+          context: CodacyAWS
+          requires:
+            - publish_npm
