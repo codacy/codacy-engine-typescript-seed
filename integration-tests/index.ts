@@ -1,26 +1,26 @@
-import * as seed from "codacy-seed"
+import { Codacyrc, CodacyResult, Engine, run } from "codacy-seed"
 
-const engine: seed.Engine = async function (
-  codacyrc?: seed.Codacyrc
-): Promise<seed.CodacyResult[]> {
+const engine: Engine = async function (
+  codacyrc?: Codacyrc
+): Promise<CodacyResult[]> {
   function testResult() {
     if (codacyrc == undefined) {
       return [
-        new seed.CodacyResult("file.js", "No .codacyrc", "no-codacyrc", 1),
+        new CodacyResult("file.js", "No .codacyrc", "no-codacyrc", 1),
       ]
     } else {
-      const result: seed.CodacyResult[] = []
+      const result: CodacyResult[] = []
       if (codacyrc.files) {
         result.concat(
           codacyrc.files.map(
             (f: string) =>
-              new seed.CodacyResult(f, "Found file", "found-file", 1)
+              new CodacyResult(f, "Found file", "found-file", 1)
           )
         )
       }
       if (codacyrc.tools && codacyrc.tools.length > 0) {
         result.push(
-          new seed.CodacyResult(
+          new CodacyResult(
             "file.js",
             codacyrc.tools[0].name,
             "tool-name",
@@ -34,4 +34,4 @@ const engine: seed.Engine = async function (
   return testResult()
 }
 
-seed.run(engine)
+run(engine)
