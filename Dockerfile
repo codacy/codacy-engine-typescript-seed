@@ -1,6 +1,4 @@
-ARG NODE_IMAGE_VERSION=13-alpine
-
-FROM node:$NODE_IMAGE_VERSION
+FROM node:13-alpine
 
 WORKDIR /workdir
 
