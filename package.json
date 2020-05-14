@@ -16,6 +16,8 @@
     "url": "git+https://github.com/codacy/codacy-engine-typescript-seed.git"
   },
   "license": "Apache-2.0",
+  "main": "dist/src/index.js",
+  "typings": "dist/src/index.d.js",
   "directories": {
     "test": "./src/test",
     "src": "./src"
@@ -41,10 +43,9 @@
     ]
   },
   "prettier": {
-    "semi": false
+    "semi": false,
+    "trailingComma": "none"
   },
-  "main": "dist/src/index.js",
-  "typings": "dist/src/index.d.js",
   "mocha": {
     "extension": [
       "ts"
@@ -59,24 +60,24 @@
   "devDependencies": {
     "@types/chai": "^4.2.11",
     "@types/mocha": "^7.0.2",
-    "@types/node": "^13.9.4",
-    "@types/node-fetch": "^2.5.5",
+    "@types/node": "^13.13.6",
+    "@types/node-fetch": "^2.5.7",
     "@types/simple-mock": "^0.8.1",
-    "@typescript-eslint/eslint-plugin": "^2.25.0",
-    "@typescript-eslint/parser": "^2.25.0",
+    "@typescript-eslint/eslint-plugin": "^2.33.0",
+    "@typescript-eslint/parser": "^2.33.0",
     "chai": "^4.2.0",
     "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.10.1",
-    "eslint-plugin-simple-import-sort": "^5.0.2",
-    "eslint-plugin-unused-imports": "^0.1.2",
-    "husky": "^4.2.3",
-    "lint-staged": "^10.0.9",
-    "mocha": "^7.1.1",
-    "prettier": "^2.0.2",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-simple-import-sort": "^5.0.3",
+    "eslint-plugin-unused-imports": "^0.1.3",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.2",
+    "mocha": "^7.1.2",
+    "prettier": "^2.0.5",
     "simple-mock": "^0.8.0",
-    "sort-package-json": "^1.40.0",
+    "sort-package-json": "^1.42.2",
     "ts-loader": "^6.2.2",
-    "ts-node": "^8.8.1",
-    "typescript": "^3.8.3"
+    "ts-node": "^8.10.1",
+    "typescript": "^3.9.2"
   }
 }

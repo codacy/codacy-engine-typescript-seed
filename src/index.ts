@@ -5,21 +5,18 @@ import {
   Parameter,
   ParameterValue,
   Pattern,
-  Tool,
+  Tool
 } from "./model/codacyInput"
-import { CodacyResult } from "./model/codacyResult"
-import {
-  DescriptionEntry,
-  DescriptionParameter
-} from "./model/description"
+import { DescriptionEntry, DescriptionParameter } from "./model/description"
 import {
   Category,
   Level,
   Patterns,
   PatternsEntry,
   PatternsParameter,
-  SecuritySubcategory,
+  SecuritySubcategory
 } from "./model/patterns"
+import { FileError, Issue, ToolResult } from "./model/toolResult"
 import { run } from "./run"
 
 export {
@@ -36,8 +33,10 @@ export {
   Patterns,
   PatternsEntry,
   SecuritySubcategory,
-  CodacyResult,
+  Issue,
+  FileError,
+  ToolResult,
   Engine,
   writeFile,
-  run,
+  run
 }
