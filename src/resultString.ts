@@ -1,6 +1,6 @@
-import { CodacyResult } from "./model/codacyResult"
+import { ToolResult } from "./model/toolResult"
 
-export function resultString(results: CodacyResult[]): string {
-  const lines = results.map(result => JSON.stringify(result))
+export function resultString(results: ToolResult[]): string {
+  const lines = results.map((result) => JSON.stringify(result))
   return lines.join("\n")
 }

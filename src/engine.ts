@@ -1,4 +1,4 @@
-import { Codacyrc } from "./model/codacyInput";
-import { CodacyResult } from "./model/codacyResult";
+import { Codacyrc } from "./model/codacyInput"
+import { ToolResult } from "./model/toolResult"
 
-export type Engine = (codacyrc?: Codacyrc) => Promise<CodacyResult[]>
+export type Engine = (codacyrc?: Codacyrc) => Promise<ToolResult[]>

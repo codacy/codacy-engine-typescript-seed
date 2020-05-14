@@ -8,9 +8,9 @@ async function runImpl(engine: Engine) {
 
   const codacyrc = jsonFile ? parseCodacyrcFile(jsonFile) : undefined
 
-  const codacyResults = await engine(codacyrc)
+  const toolResults = await engine(codacyrc)
 
-  const lines = resultString(codacyResults)
+  const lines = resultString(toolResults)
 
   console.log(lines)
 }
