@@ -12,9 +12,9 @@ export class Parameter {
 
 export class Pattern {
   readonly patternId: string
-  readonly parameters?: Parameter[]
+  readonly parameters: Parameter[]
 
-  constructor(patternId: string, parameters?: Parameter[]) {
+  constructor(patternId: string, parameters: Parameter[] = []) {
     this.patternId = patternId
     this.parameters = parameters
   }
