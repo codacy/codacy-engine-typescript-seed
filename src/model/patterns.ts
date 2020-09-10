@@ -49,20 +49,23 @@ export class PatternsEntry {
   level: Level
   category: Category
   subcategory?: SecuritySubcategory
-  parameters?: PatternsParameter[]
+  parameters: PatternsParameter[]
+  enabled: Boolean
 
   constructor(
     patternId: string,
     level: Level,
     category: Category,
     subcategory?: SecuritySubcategory,
-    parameters?: PatternsParameter[]
+    parameters: PatternsParameter[] = [],
+    enabled: Boolean = false
   ) {
     this.patternId = patternId
     this.level = level
     this.category = category
     this.subcategory = subcategory
     this.parameters = parameters
+    this.enabled = enabled
   }
 }
 
