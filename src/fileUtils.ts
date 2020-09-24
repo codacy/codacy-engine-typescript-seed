@@ -3,6 +3,7 @@ import fs from "fs"
 import { promisify } from "util"
 
 import { Codacyrc } from "./model/codacyInput"
+import { Specification } from "./model/codacyInput"
 
 export const readFile = promisify(fs.readFile)
 export const writeFile = promisify(fs.writeFile)
@@ -18,5 +19,9 @@ export async function readJsonFile(file: string): Promise<string | undefined> {
 }
 
 export function parseCodacyrcFile(content: string): Codacyrc {
+  return JSON.parse(content)
+}
+
+export function parseSpecification(content: string): Specification {
   return JSON.parse(content)
 }

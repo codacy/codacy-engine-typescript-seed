@@ -5,6 +5,7 @@ import {
   Parameter,
   ParameterValue,
   Pattern,
+  Specification,
   Tool
 } from "./model/codacyInput"
 import { DescriptionEntry, DescriptionParameter } from "./model/description"
@@ -20,6 +21,7 @@ import { FileError, Issue, ToolResult } from "./model/toolResult"
 import { run } from "./run"
 
 export {
+  Specification,
   Codacyrc,
   Tool,
   Pattern,

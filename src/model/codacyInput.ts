@@ -12,7 +12,7 @@ export class Parameter {
 
 export class Pattern {
   readonly patternId: string
-  readonly parameters: Parameter[]
+  parameters: Parameter[]
 
   constructor(patternId: string, parameters: Parameter[] = []) {
     this.patternId = patternId
@@ -37,5 +37,13 @@ export class Codacyrc {
   constructor(files?: string[], tools?: Tool[]) {
     this.files = files
     this.tools = tools
+  }
+}
+
+export class Specification {
+  readonly patterns: Pattern[]
+
+  constructor(patterns: Pattern[]) {
+    this.patterns = patterns
   }
 }
