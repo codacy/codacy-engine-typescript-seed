@@ -35,21 +35,21 @@ export type SecuritySubcategory =
   | "Regex"
   | "SSL"
 
-export class PatternsParameter {
+export class ParameterSpec {
   name: string
-  default?: any
+  default: any
 
-  constructor(name: string, d?: any) {
+  constructor(name: string, d: any) {
     this.name = name
     this.default = d
   }
 }
-export class PatternsEntry {
+export class PatternSpec {
   patternId: string
   level: Level
   category: Category
   subcategory?: SecuritySubcategory
-  parameters: PatternsParameter[]
+  parameters: ParameterSpec[]
   enabled: Boolean
 
   constructor(
@@ -57,7 +57,7 @@ export class PatternsEntry {
     level: Level,
     category: Category,
     subcategory?: SecuritySubcategory,
-    parameters: PatternsParameter[] = [],
+    parameters: ParameterSpec[] = [],
     enabled: Boolean = false
   ) {
     this.patternId = patternId
@@ -69,11 +69,11 @@ export class PatternsEntry {
   }
 }
 
-export class Patterns {
+export class Specification {
   name: string
   version: string
-  patterns: PatternsEntry[]
-  constructor(name: string, version: string, patterns: PatternsEntry[]) {
+  patterns: PatternSpec[]
+  constructor(name: string, version: string, patterns: PatternSpec[]) {
     this.name = name
     this.version = version
     this.patterns = patterns
