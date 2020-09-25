@@ -1,13 +1,24 @@
+import { addDefaultParameters } from "./addDefaultParameters"
 import { Engine } from "./engine"
-import { parseCodacyrcFile, readJsonFile } from "./fileUtils"
+import {
+  parseCodacyrcFile,
+  parseSpecification,
+  readJsonFile
+} from "./fileUtils"
 import { parseTimeoutSeconds } from "./parseTimeoutSeconds"
 import { resultString } from "./resultString"
 
 async function runImpl(engine: Engine) {
-  const jsonFile = await readJsonFile("/.codacyrc")
+  const jsonSpecification = await readJsonFile("/docs/patterns.json")
+  const specificaiton = jsonSpecification
+    ? parseSpecification(jsonSpecification)
+    : undefined
 
-  const codacyrc = jsonFile ? parseCodacyrcFile(jsonFile) : undefined
+  const jsonCodacyrc = await readJsonFile("/.codacyrc")
+  const codacyrc = jsonCodacyrc ? parseCodacyrcFile(jsonCodacyrc) : undefined
 
+  // Adds default parameters to codacyrc when they are not present on the configuration
+  codacyrc ? addDefaultParameters(codacyrc, specificaiton) : undefined
   const toolResults = await engine(codacyrc)
 
   const lines = resultString(toolResults)
