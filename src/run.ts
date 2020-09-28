@@ -10,7 +10,7 @@ import { resultString } from "./resultString"
 
 async function runImpl(engine: Engine) {
   const jsonSpecification = await readJsonFile("/docs/patterns.json")
-  const specificaiton = jsonSpecification
+  const specification = jsonSpecification
     ? parseSpecification(jsonSpecification)
     : undefined
 
@@ -18,8 +18,12 @@ async function runImpl(engine: Engine) {
   const codacyrc = jsonCodacyrc ? parseCodacyrcFile(jsonCodacyrc) : undefined
 
   // Adds default parameters to codacyrc when they are not present on the configuration
-  codacyrc ? addDefaultParameters(codacyrc, specificaiton) : undefined
-  const toolResults = await engine(codacyrc)
+  const withDefaultParameters =
+    codacyrc && specification
+      ? addDefaultParameters(codacyrc, specification)
+      : codacyrc
+
+  const toolResults = await engine(withDefaultParameters)
 
   const lines = resultString(toolResults)
 

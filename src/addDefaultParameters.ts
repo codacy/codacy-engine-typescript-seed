@@ -1,55 +1,53 @@
 import {
   Codacyrc,
   Parameter,
-  ParameterSpec,
   Pattern,
   PatternSpec,
-  Specification
+  Specification,
+  Tool
 } from "."
 
 export function addDefaultParameters(
   codacyrc: Codacyrc,
-  specification?: Specification
-) {
-  const tools = codacyrc.tools ?? []
-  const specificationPatterns = specification ? specification.patterns : []
+  specification: Specification
+): Codacyrc {
+  if (specification.patterns === undefined || codacyrc.tools === undefined)
+    return codacyrc
 
-  tools.map((tool) => {
-    const patterns = tool.patterns ?? []
-    patterns.map((pattern) =>
-      addDefaultParamentersToPattern(pattern, specificationPatterns)
-    )
+  const newTools = codacyrc.tools.map((tool) => {
+    if (tool.name === specification.name) {
+      if (tool.patterns === undefined) return tool
+
+      const newPatterns = tool.patterns.map((pattern) =>
+        addDefaultParamentersToPattern(pattern, specification.patterns)
+      )
+      return new Tool(tool.name, newPatterns)
+    } else {
+      return tool
+    }
   })
+  return new Codacyrc(codacyrc.files, newTools)
 }
 
 function addDefaultParamentersToPattern(
   pattern: Pattern,
   specificationPatterns: PatternSpec[]
-) {
+): Pattern {
   const specificationPattern = specificationPatterns.find(
     (specPattern) => specPattern.patternId === pattern.patternId
   )
 
-  specificationPattern
-    ? addMissingParameters(pattern, specificationPattern)
-    : pattern.parameters
-}
+  if (specificationPattern === undefined) return pattern
 
-function addMissingParameters(
-  pattern: Pattern,
-  specificationPattern: PatternSpec
-) {
-  const finalParameters = specificationPattern.parameters.map(
-    (specParameter) => {
-      const overrideParameter = pattern.parameters.find(
-        (param) => param.name === specParameter.name
-      )
+  const newParameters = specificationPattern.parameters.map((specParameter) => {
+    const overrideParameter = pattern.parameters.find(
+      (param) => param.name === specParameter.name
+    )
 
-      return (
-        overrideParameter ??
-        new Parameter(specParameter.name, specParameter.default)
-      )
-    }
-  )
-  pattern.parameters = finalParameters
+    return (
+      overrideParameter ??
+      new Parameter(specParameter.name, specParameter.default)
+    )
+  })
+  return new Pattern(pattern.patternId, newParameters)
 }
