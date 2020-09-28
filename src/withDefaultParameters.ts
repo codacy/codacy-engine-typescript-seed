@@ -8,7 +8,7 @@ import {
   Tool
 } from "."
 
-export function addDefaultParameters(
+export function withDefaultParameters(
   codacyrc: Codacyrc,
   specification?: Specification
 ): Codacyrc {
@@ -19,14 +19,14 @@ export function addDefaultParameters(
     if (tool.patterns === undefined) return tool
 
     const patternsWithDefaults = tool.patterns.map((pattern) =>
-      withDefaultParamenters(pattern, specification.patterns)
+      withDefaultParamentersForPattern(pattern, specification.patterns)
     )
     return new Tool(tool.name, patternsWithDefaults)
   })
   return new Codacyrc(codacyrc.files, toolsWithDefaults)
 }
 
-function withDefaultParamenters(
+function withDefaultParamentersForPattern(
   pattern: Pattern,
   specificationPatterns: PatternSpec[]
 ): Pattern {
