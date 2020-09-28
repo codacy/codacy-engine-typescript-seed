@@ -5,20 +5,21 @@ import {
   Pattern,
   PatternSpec,
   Specification,
-  Tool} from "."
+  Tool
+} from "."
 
 export function addDefaultParameters(
   codacyrc: Codacyrc,
   specification?: Specification
 ): Codacyrc {
-  const tools = codacyrc.tools ?? []
-  const specificationPatterns = specification ? specification.patterns : []
+  if (codacyrc.tools === undefined || specification?.patterns === undefined)
+    return codacyrc
 
-  const toolsWithDefaults = tools.map((tool) => {
-    const patterns: Pattern[] = tool.patterns ?? []
+  const toolsWithDefaults = codacyrc.tools.map((tool) => {
+    if (tool.patterns === undefined) return tool
 
-    const patternsWithDefaults = patterns.map((pattern) =>
-      withDefaultParamenters(pattern, specificationPatterns)
+    const patternsWithDefaults = tool.patterns.map((pattern) =>
+      withDefaultParamenters(pattern, specification.patterns)
     )
     return new Tool(tool.name, patternsWithDefaults)
   })
