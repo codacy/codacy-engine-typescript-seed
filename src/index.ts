@@ -11,11 +11,10 @@ import { DescriptionEntry, DescriptionParameter } from "./model/description"
 import {
   Category,
   Level,
-  Patterns,
-  PatternsEntry,
-  PatternsParameter,
-  SecuritySubcategory
-} from "./model/patterns"
+  ParameterSpec,
+  PatternSpec,
+  SecuritySubcategory,
+  Specification} from "./model/specification"
 import { FileError, Issue, ToolResult } from "./model/toolResult"
 import { run } from "./run"
 
@@ -24,14 +23,14 @@ export {
   Tool,
   Pattern,
   Parameter,
-  PatternsParameter,
+  Specification,
+  PatternSpec,
+  ParameterSpec,
   DescriptionEntry,
   DescriptionParameter,
   ParameterValue,
   Category,
   Level,
-  Patterns,
-  PatternsEntry,
   SecuritySubcategory,
   Issue,
   FileError,
