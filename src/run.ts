@@ -17,9 +17,11 @@ async function runImpl(engine: Engine) {
   const jsonCodacyrc = await readJsonFile("/.codacyrc")
   const codacyrc = jsonCodacyrc ? parseCodacyrcFile(jsonCodacyrc) : undefined
 
-  // Adds default parameters to codacyrc when they are not present on the configuration
-  codacyrc ? addDefaultParameters(codacyrc, specificaiton) : undefined
-  const toolResults = await engine(codacyrc)
+  // Creates a new configuration with default parameters when they are not present on the codacyrc
+  const codacyrcWithDefaults = codacyrc
+    ? addDefaultParameters(codacyrc, specificaiton)
+    : undefined
+  const toolResults = await engine(codacyrcWithDefaults)
 
   const lines = resultString(toolResults)
 
