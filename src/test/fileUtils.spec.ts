@@ -1,8 +1,10 @@
 import { deepStrictEqual } from "assert"
 import chai from "chai"
+import { Specification } from ".."
 
-import { parseCodacyrcFile } from "../fileUtils"
+import { parseCodacyrcFile, parseSpecification } from "../fileUtils"
 import { Codacyrc, Pattern, Tool } from "../model/codacyInput"
+import { PatternSpec } from "../model/specification"
 
 describe("fileUtils", () => {
   describe("parseCodacyrcFile", () => {
@@ -98,7 +100,7 @@ describe("fileUtils", () => {
       }
       deepStrictEqual(parsed, expected)
     })
-    it("should parse a codacyrc file with no parameters in pattern", () => {
+    it("should parse codacyrc files with no parameters in pattern", () => {
       const codacyrcFileContent = `{
         "files" : [],
         "tools":[
@@ -115,10 +117,58 @@ describe("fileUtils", () => {
       const parsed = parseCodacyrcFile(codacyrcFileContent)
       const parameters = parsed.tools?.[0].patterns?.[0].parameters
       deepStrictEqual(parameters, [])
+
+      const expected: Codacyrc = {
+        "files" : [],
+        "tools":[
+          {
+            "name": "",
+            "patterns":[
+              {
+                "patternId":"latedef",
+                "parameters": []
+              }
+            ]
+          }
+        ]
+      }
+
+      deepStrictEqual(parsed, expected)
     })
     it("should fail with an invalid codacyrc file", () => {
       const wrongCodacyrcFileContent = `{`
       chai.expect(() => parseCodacyrcFile(wrongCodacyrcFileContent)).to.throw()
+    })
+  })
+
+  describe("parseSpecification", () => {
+    it("should parse specifications with no parameters in patters", () => {
+      const specificationContent = `{
+        "name": "tool",
+        "version": "10",
+        "patterns": [
+          {
+            "patternId": "a-patternId",
+            "level": "Warning",
+            "category": "CodeStyle"
+          }
+        ]
+      }`
+      const result = parseSpecification(specificationContent)
+      const expected: Specification = {
+        "name": "tool",
+        "version": "10",
+        "patterns": [
+          {
+            "patternId": "a-patternId",
+            "level": "Warning",
+            "category": "CodeStyle",
+            "parameters": [],
+            "enabled": false
+          }
+        ]
+      }
+      deepStrictEqual(result, expected)
     })
   })
 })
