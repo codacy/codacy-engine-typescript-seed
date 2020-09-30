@@ -1,8 +1,8 @@
-import { deepEqual } from "assert"
+import { deepStrictEqual } from "assert"
 import chai from "chai"
 
 import { parseCodacyrcFile } from "../fileUtils"
-import { Codacyrc } from "../model/codacyInput"
+import { Codacyrc, Pattern, Tool } from "../model/codacyInput"
 
 describe("fileUtils", () => {
   describe("parseCodacyrcFile", () => {
@@ -46,7 +46,7 @@ describe("fileUtils", () => {
           }
         ]
       }
-      deepEqual(parsed, expected)
+      deepStrictEqual(parsed, expected)
     })
     it("should parse a codacyrc file with no files", () => {
       const codacyrcFileContent = `{
@@ -86,7 +86,7 @@ describe("fileUtils", () => {
           }
         ]
       }
-      deepEqual(parsed, expected)
+      deepStrictEqual(parsed, expected)
     })
     it("should parse a codacyrc file with no tools", () => {
       const codacyrcFileContent = `{
@@ -96,7 +96,25 @@ describe("fileUtils", () => {
       const expected: Codacyrc = {
         files: ["foo/bar/baz.js", "foo2/bar/baz.php"]
       }
-      deepEqual(parsed, expected)
+      deepStrictEqual(parsed, expected)
+    })
+    it("should parse a codacyrc file with no parameters in pattern", () => {
+      const codacyrcFileContent = `{
+        "files" : [],
+        "tools":[
+          {
+            "name": "",
+            "patterns":[
+              {
+                "patternId":"latedef"
+              }
+            ]
+          }
+        ]
+      }`
+      const parsed = parseCodacyrcFile(codacyrcFileContent)
+      const parameters = parsed.tools?.[0].patterns?.[0].parameters
+      deepStrictEqual(parameters, [])
     })
     it("should fail with an invalid codacyrc file", () => {
       const wrongCodacyrcFileContent = `{`
