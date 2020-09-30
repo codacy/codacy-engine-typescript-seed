@@ -142,7 +142,7 @@ describe("fileUtils", () => {
   })
 
   describe("parseSpecification", () => {
-    it("should parse specifications with no parameters in patters", () => {
+    it("should parse specifications with no parameters in patterns", () => {
       const specificationContent = `{
         "name": "tool",
         "version": "10",
