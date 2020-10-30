@@ -1,8 +1,10 @@
-import { deepEqual } from "assert"
+import { deepStrictEqual } from "assert"
 import chai from "chai"
+import { Specification } from ".."
 
-import { parseCodacyrcFile } from "../fileUtils"
-import { Codacyrc } from "../model/codacyInput"
+import { parseCodacyrcFile, parseSpecification } from "../fileUtils"
+import { Codacyrc, Pattern, Tool } from "../model/codacyInput"
+import { PatternSpec } from "../model/specification"
 
 describe("fileUtils", () => {
   describe("parseCodacyrcFile", () => {
@@ -46,7 +48,7 @@ describe("fileUtils", () => {
           }
         ]
       }
-      deepEqual(parsed, expected)
+      deepStrictEqual(parsed, expected)
     })
     it("should parse a codacyrc file with no files", () => {
       const codacyrcFileContent = `{
@@ -86,7 +88,7 @@ describe("fileUtils", () => {
           }
         ]
       }
-      deepEqual(parsed, expected)
+      deepStrictEqual(parsed, expected)
     })
     it("should parse a codacyrc file with no tools", () => {
       const codacyrcFileContent = `{
@@ -96,11 +98,77 @@ describe("fileUtils", () => {
       const expected: Codacyrc = {
         files: ["foo/bar/baz.js", "foo2/bar/baz.php"]
       }
-      deepEqual(parsed, expected)
+      deepStrictEqual(parsed, expected)
+    })
+    it("should parse codacyrc files with no parameters in pattern", () => {
+      const codacyrcFileContent = `{
+        "files" : [],
+        "tools":[
+          {
+            "name": "",
+            "patterns":[
+              {
+                "patternId":"latedef"
+              }
+            ]
+          }
+        ]
+      }`
+      const parsed = parseCodacyrcFile(codacyrcFileContent)
+      const parameters = parsed.tools?.[0].patterns?.[0].parameters
+      deepStrictEqual(parameters, [])
+
+      const expected: Codacyrc = {
+        "files" : [],
+        "tools":[
+          {
+            "name": "",
+            "patterns":[
+              {
+                "patternId":"latedef",
+                "parameters": []
+              }
+            ]
+          }
+        ]
+      }
+
+      deepStrictEqual(parsed, expected)
     })
     it("should fail with an invalid codacyrc file", () => {
       const wrongCodacyrcFileContent = `{`
       chai.expect(() => parseCodacyrcFile(wrongCodacyrcFileContent)).to.throw()
+    })
+  })
+
+  describe("parseSpecification", () => {
+    it("should parse specifications with no parameters in patterns", () => {
+      const specificationContent = `{
+        "name": "tool",
+        "version": "10",
+        "patterns": [
+          {
+            "patternId": "a-patternId",
+            "level": "Warning",
+            "category": "CodeStyle"
+          }
+        ]
+      }`
+      const result = parseSpecification(specificationContent)
+      const expected: Specification = {
+        "name": "tool",
+        "version": "10",
+        "patterns": [
+          {
+            "patternId": "a-patternId",
+            "level": "Warning",
+            "category": "CodeStyle",
+            "parameters": [],
+            "enabled": false
+          }
+        ]
+      }
+      deepStrictEqual(result, expected)
     })
   })
 })
