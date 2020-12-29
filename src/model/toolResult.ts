@@ -7,23 +7,32 @@ export class Issue {
   readonly message: string
   readonly patternId: string
   readonly line: number
+  readonly suggestion?: string
 
   constructor(
     filename: string,
     message: string,
     patternId: string,
-    line: number
+    line: number,
+    suggestion?: string
   ) {
     this.filename = filename
     this.message = message
     this.patternId = patternId
     this.line = line
+    this.suggestion = suggestion
   }
 
   relativeTo(directory: string): Issue {
     const newFilename = relative(directory, this.filename)
 
-    return new Issue(newFilename, this.message, this.patternId, this.line)
+    return new Issue(
+      newFilename,
+      this.message,
+      this.patternId,
+      this.line,
+      this.suggestion
+    )
   }
 }
 export class FileError {
