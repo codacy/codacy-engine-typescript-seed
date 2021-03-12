@@ -1,5 +1,5 @@
 import { Engine } from "./engine"
-import { writeFile } from "./fileUtils"
+import { readFile, writeFile } from "./fileUtils"
 import {
   Codacyrc,
   Parameter,
@@ -14,7 +14,8 @@ import {
   ParameterSpec,
   PatternSpec,
   SecuritySubcategory,
-  Specification} from "./model/specification"
+  Specification
+} from "./model/specification"
 import { FileError, Issue, ToolResult } from "./model/toolResult"
 import { run } from "./run"
 
@@ -36,6 +37,7 @@ export {
   FileError,
   ToolResult,
   Engine,
+  readFile,
   writeFile,
   run
 }
