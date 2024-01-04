@@ -54,7 +54,7 @@
     "spec": "src/test/**/*.spec.ts"
   },
   "dependencies": {
-    "@nodelib/fs.walk": "^1.2.4",
+    "@nodelib/fs.walk": "^2.0.0",
     "node-fetch": "^2.6.7"
   },
   "devDependencies": {
