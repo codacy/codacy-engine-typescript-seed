@@ -54,11 +54,11 @@
     "spec": "src/test/**/*.spec.ts"
   },
   "dependencies": {
-    "@nodelib/fs.walk": "^2.0.0",
+    "@nodelib/fs.walk": "^1.2.4",
     "node-fetch": "^2.6.7"
   },
   "devDependencies": {
-    "@types/chai": "^4.2.11",
+    "@types/chai": "^4.3.11",
     "@types/mocha": "^7.0.2",
     "@types/node": "^13.13.6",
     "@types/node-fetch": "^2.5.7",
