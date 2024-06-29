@@ -13,6 +13,7 @@ import {
   Level,
   ParameterSpec,
   PatternSpec,
+  ScanType,
   SecuritySubcategory,
   Specification
 } from "./model/specification"
@@ -32,6 +33,7 @@ export {
   ParameterValue,
   Category,
   Level,
+  ScanType,
   SecuritySubcategory,
   Issue,
   FileError,

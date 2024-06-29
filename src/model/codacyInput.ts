@@ -33,9 +33,11 @@ export class Tool {
 export class Codacyrc {
   readonly files?: string[]
   readonly tools?: Tool[]
+  readonly options?: Map<string, any>
 
-  constructor(files?: string[], tools?: Tool[]) {
+  constructor(files?: string[], tools?: Tool[], options?: Map<string, any>) {
     this.files = files
     this.tools = tools
+    this.options = options
   }
 }

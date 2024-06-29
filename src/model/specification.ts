@@ -35,6 +35,18 @@ export type SecuritySubcategory =
   | "Regex"
   | "SSL"
 
+export type ScanType =
+  | "SAST"
+  | "SCA"
+  | "ContainerSCA"
+  | "Secrets"
+  | "IaC"
+  | "CICD"
+  | "License"
+  | "PenTesting"
+  | "DAST"
+  | "CSPM"
+
 export class ParameterSpec {
   name: string
   default: any
@@ -49,6 +61,7 @@ export class PatternSpec {
   level: Level
   category: Category
   subcategory?: SecuritySubcategory
+  scanType?: ScanType
   parameters: ParameterSpec[]
   enabled: Boolean
 
@@ -57,6 +70,7 @@ export class PatternSpec {
     level: Level,
     category: Category,
     subcategory?: SecuritySubcategory,
+    scanType?: ScanType,
     parameters: ParameterSpec[] = [],
     enabled: Boolean = false
   ) {
@@ -64,6 +78,7 @@ export class PatternSpec {
     this.level = level
     this.category = category
     this.subcategory = subcategory
+    this.scanType = scanType
     this.parameters = parameters
     this.enabled = enabled
   }

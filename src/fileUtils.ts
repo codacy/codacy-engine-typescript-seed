@@ -1,5 +1,3 @@
-import { walk as fsWalk } from "@nodelib/fs.walk"
-import { create } from "domain"
 import fs from "fs"
 import { promisify } from "util"
 
@@ -8,7 +6,6 @@ import { PatternSpec, Specification } from "./model/specification"
 
 export const readFile = promisify(fs.readFile)
 export const writeFile = promisify(fs.writeFile)
-export const walk = promisify(fsWalk)
 
 export async function readJsonFile(file: string): Promise<string | undefined> {
   try {
@@ -32,7 +29,8 @@ export function parseCodacyrcFile(content: string): Codacyrc {
             (pattern) => new Pattern(pattern.patternId, pattern.parameters)
           )
         )
-    )
+    ),
+    parsed.options
   )
 
   return JSON.parse(JSON.stringify(created))
@@ -51,6 +49,7 @@ export function parseSpecification(content: string): Specification {
           pattern.level,
           pattern.category,
           pattern.subcategory,
+          pattern.scanType,
           pattern.parameters,
           pattern.enabled
         )
