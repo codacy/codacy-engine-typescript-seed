@@ -2,6 +2,7 @@ import { Engine } from "./engine"
 import { readFile, writeFile } from "./fileUtils"
 import {
   Codacyrc,
+  Options,
   Parameter,
   ParameterValue,
   Pattern,
@@ -22,6 +23,7 @@ import { run } from "./run"
 
 export {
   Codacyrc,
+  Options,
   Tool,
   Pattern,
   Parameter,

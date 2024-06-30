@@ -2,5 +2,7 @@
 <checkstyle version="4.3">
     <file name="file.js">
         <error source="tool-name" line="1" message="Example" severity="info" />
+        <error source="tool-extra-parameter-name" line="1" message="tool-extra-parameter-value"
+            severity="info" />
     </file>
 </checkstyle>

@@ -18,6 +18,10 @@ const engine: Engine = async function (
           new Issue("file.js", codacyrc.tools[0].name, "tool-name", 1)
         )
       }
+      if (codacyrc.options) {
+        const key = "tool-extra-parameter-name"
+        result.push(new Issue("file.js", codacyrc.options[key], key, 1))
+      }
       return result
     } else {
       return [new Issue("file.js", "No .codacyrc", "no-codacyrc", 1)]
