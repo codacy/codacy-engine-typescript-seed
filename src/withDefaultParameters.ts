@@ -1,7 +1,6 @@
 import {
   Codacyrc,
   Parameter,
-  ParameterSpec,
   Pattern,
   PatternSpec,
   Specification,

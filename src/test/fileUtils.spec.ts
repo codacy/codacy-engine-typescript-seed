@@ -1,10 +1,9 @@
 import { deepStrictEqual } from "assert"
 import chai from "chai"
-import { Specification } from ".."
 
+import { Specification } from ".."
 import { parseCodacyrcFile, parseSpecification } from "../fileUtils"
-import { Codacyrc, Pattern, Tool } from "../model/codacyInput"
-import { PatternSpec } from "../model/specification"
+import { Codacyrc } from "../model/codacyInput"
 
 describe("fileUtils", () => {
   describe("parseCodacyrcFile", () => {
