@@ -4,3 +4,4 @@ dist
 tsconfig.tsbuildinfo
 .DS_Store
 .vscode
+codacy-seed-0.0.1.tgz

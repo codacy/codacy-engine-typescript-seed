@@ -1,7 +1,6 @@
 import {
   Codacyrc,
   Parameter,
-  ParameterSpec,
   Pattern,
   PatternSpec,
   Specification,
@@ -23,7 +22,7 @@ export function withDefaultParameters(
     )
     return new Tool(tool.name, patternsWithDefaults)
   })
-  return new Codacyrc(codacyrc.files, toolsWithDefaults)
+  return new Codacyrc(codacyrc.files, toolsWithDefaults, codacyrc.options)
 }
 
 function withDefaultParamentersForPattern(

@@ -2,6 +2,7 @@ import { Engine } from "./engine"
 import { readFile, writeFile } from "./fileUtils"
 import {
   Codacyrc,
+  Options,
   Parameter,
   ParameterValue,
   Pattern,
@@ -13,6 +14,7 @@ import {
   Level,
   ParameterSpec,
   PatternSpec,
+  ScanType,
   SecuritySubcategory,
   Specification
 } from "./model/specification"
@@ -21,6 +23,7 @@ import { run } from "./run"
 
 export {
   Codacyrc,
+  Options,
   Tool,
   Pattern,
   Parameter,
@@ -32,6 +35,7 @@ export {
   ParameterValue,
   Category,
   Level,
+  ScanType,
   SecuritySubcategory,
   Issue,
   FileError,

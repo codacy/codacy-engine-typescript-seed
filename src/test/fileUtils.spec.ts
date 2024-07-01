@@ -1,10 +1,9 @@
 import { deepStrictEqual } from "assert"
 import chai from "chai"
-import { Specification } from ".."
 
+import { Specification } from ".."
 import { parseCodacyrcFile, parseSpecification } from "../fileUtils"
-import { Codacyrc, Pattern, Tool } from "../model/codacyInput"
-import { PatternSpec } from "../model/specification"
+import { Codacyrc } from "../model/codacyInput"
 
 describe("fileUtils", () => {
   describe("parseCodacyrcFile", () => {
@@ -119,14 +118,14 @@ describe("fileUtils", () => {
       deepStrictEqual(parameters, [])
 
       const expected: Codacyrc = {
-        "files" : [],
-        "tools":[
+        files: [],
+        tools: [
           {
-            "name": "",
-            "patterns":[
+            name: "",
+            patterns: [
               {
-                "patternId":"latedef",
-                "parameters": []
+                patternId: "latedef",
+                parameters: []
               }
             ]
           }
@@ -156,19 +155,31 @@ describe("fileUtils", () => {
       }`
       const result = parseSpecification(specificationContent)
       const expected: Specification = {
-        "name": "tool",
-        "version": "10",
-        "patterns": [
+        name: "tool",
+        version: "10",
+        patterns: [
           {
-            "patternId": "a-patternId",
-            "level": "Warning",
-            "category": "CodeStyle",
-            "parameters": [],
-            "enabled": false
+            patternId: "a-patternId",
+            level: "Warning",
+            category: "CodeStyle",
+            parameters: [],
+            enabled: false
           }
         ]
       }
       deepStrictEqual(result, expected)
     })
+  })
+  it("should parse a codacyrc file with options", () => {
+    const codacyrcFileContent = `{
+      "options": {
+        "language": "typescript"
+      }
+    }`
+    const parsed = parseCodacyrcFile(codacyrcFileContent)
+    const expected: Codacyrc = {
+      options: { language: "typescript" }
+    }
+    deepStrictEqual(parsed, expected)
   })
 })

@@ -30,12 +30,16 @@ export class Tool {
   }
 }
 
+export type Options = { [k: string]: any }
+
 export class Codacyrc {
   readonly files?: string[]
   readonly tools?: Tool[]
+  readonly options?: Options
 
-  constructor(files?: string[], tools?: Tool[]) {
+  constructor(files?: string[], tools?: Tool[], options?: Options) {
     this.files = files
     this.tools = tools
+    this.options = options
   }
 }
