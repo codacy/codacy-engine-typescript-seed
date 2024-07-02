@@ -31,7 +31,7 @@ workflows:
 
             # Setup npm credentials
             npm config set @codacy:registry https://registry.npmjs.org/
-            npm config set _authToken $NPM_TOKEN
+            npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
             npm config set access public
             npm config set save-exact true
 
